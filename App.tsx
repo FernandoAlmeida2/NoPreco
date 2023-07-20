@@ -1,20 +1,38 @@
+import {
+  useFonts,
+  NotoSansJP_400Regular,
+  NotoSansJP_700Bold
+} from '@expo-google-fonts/noto-sans-jp';
+import AppLoading from "expo-app-loading";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { NativeRouter, Route, Routes } from 'react-router-native';
+import Home from './src/screens/Home/Home';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    NotoSansJP_400Regular,
+    NotoSansJP_700Bold
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeRouter>
+      <View style={styles.container}>
+        <Routes>
+          <Route path="/" Component={Home} />
+        </Routes>
+        <StatusBar style="auto" />
+      </View>
+    </NativeRouter>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: '#d5d5d5'
+  }
 });
