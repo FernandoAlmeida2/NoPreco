@@ -15,6 +15,7 @@ const Header = () => {
   }
   return <View style={styles.container}>
     <Text style={styles.logo}>NoPreço</Text>
+    <Text style={styles.mode}>Visitante</Text>
   </View>;
 };
 
@@ -22,7 +23,10 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    paddingLeft: 20,
+    paddingRight: 20,
     height: 100,
     backgroundColor: '#45c43e'
   },
@@ -30,6 +34,12 @@ const styles = StyleSheet.create({
     fontFamily: "PaytoneOne_400Regular",
     fontSize: 32,
     color: "#fff"
+  },
+  mode: {
+    fontFamily: "NotoSansJP_700Bold",
+    fontSize: 16,
+    color: "#fff",
+    lineHeight: 32
   }
 });
 
