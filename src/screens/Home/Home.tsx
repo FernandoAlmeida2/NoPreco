@@ -16,24 +16,26 @@ export default function Home() {
     getProducts()
       .then((res) => setProductList(res.data!))
       .catch((err) => {
-        Alert.alert(`Unable to get the records`);
+        Alert.alert(`Unable to get the products`);
         console.log(err);
       })
       .finally(() => setLoading(false));
   }, []);
   return (
-    <View>
+    <View style={styles.container}>
       <Header />
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.contentArea}>
         {categoryList.map((c) => (
-          <ScrollView key={c} style={styles.productList}>
+          <View key={c} style={styles.productRow}>
             <Text style={styles.categoryTitle}>{c}</Text>
-            {productList
-              .filter((p) => p.category === c)
-              .map((p) => (
-                <Product key={p.id} product={p} />
-              ))}
-          </ScrollView>
+            <ScrollView contentContainerStyle={styles.productList} horizontal={true}>
+              {productList
+                .filter((p) => p.category === c)
+                .map((p) => (
+                  <Product key={p.id} product={p} />
+                ))}
+            </ScrollView>
+          </View>
         ))}
       </ScrollView>
       <Spinner
