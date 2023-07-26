@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
         paddingRight: 20
     },
     productRow: {
-        height: 450,
+        height: 480,
         justifyContent: "center",
         marginTop: 20,
         gap: 10

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductType } from '../src/services/productApi';
 
 type ProductState = {
-  product: Omit<ProductType, 'updatedAt'> | null;
+  product: ProductType | null;
 };
 
 const initialState: ProductState = {
@@ -15,7 +15,7 @@ export const productSlice = createSlice({
   reducers: {
     changeProduct(
       state,
-      action: PayloadAction<Omit<ProductType, 'updatedAt'>>
+      action: PayloadAction<ProductType>
     ) {
       return { ...state, product: action.payload };
     }

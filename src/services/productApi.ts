@@ -20,9 +20,42 @@ export type ProductType = {
   updatedAt: string;
 };
 
+export type UpdateBody = Omit<ProductType, 'id' | 'updatedAt'>;
+
 export async function getProducts() {
   const response = await axios.get<ServiceResponse<ProductType[]>>(
     `${BASE_URL}/product/getAll`
+  );
+
+  return response.data;
+}
+
+export async function updateProduct(
+  body: UpdateBody,
+  id: number,
+  token: string
+) {
+  const response = await axios.put<ServiceResponse<string>>(
+    `${BASE_URL}/product/${id}`,
+    body,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+
+  return response.data;
+}
+
+export async function deleteProduct(id: number, token: string) {
+  const response = await axios.delete<ServiceResponse<string>>(
+    `${BASE_URL}/product/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
   );
 
   return response.data;

@@ -11,11 +11,19 @@ import { styles } from './styles';
 
 export default function Home() {
   const initialProductList: ProductType[] = [];
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
+  const [refreshSwitch, setRefreshSwitch] = useState(false);
   const [productList, setProductList] = useState(initialProductList);
   const { token } = useSelector((state: RootState) => state.user);
+  const isAdmin = token !== "";
+
+  function refreshProducts() {
+    setRefreshSwitch(!refreshSwitch);
+  }
 
   useEffect(() => {
+    setLoading(true);
+    
     getProducts()
       .then((res) => setProductList(res.data!))
       .catch((err) => {
@@ -23,7 +31,7 @@ export default function Home() {
         console.log(err);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [refreshSwitch]);
 
   if(isLoading) {
     return (
@@ -40,7 +48,7 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Header admin={token !== ""} />
+      <Header admin={isAdmin} />
       <ScrollView contentContainerStyle={styles.contentArea}>
         {categoryList.map((c) => (
           <View key={c} style={styles.productRow}>
@@ -49,7 +57,7 @@ export default function Home() {
               {productList
                 .filter((p) => p.category === c)
                 .map((p) => (
-                  <Product key={p.id} product={p} />
+                  <Product key={p.id} product={p} refreshProducts={refreshProducts}/>
                 ))}
             </ScrollView>
           </View>
