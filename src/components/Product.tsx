@@ -3,7 +3,9 @@ import { deleteProduct, ProductType } from '../services/productApi';
 import { FontAwesome } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { changeProduct } from '../../redux/productSlice';
+import { useNavigate } from 'react-router-native';
 
 type Props = {
   product: ProductType;
@@ -11,8 +13,16 @@ type Props = {
 };
 
 const Product = ({ product, refreshProducts }: Props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { token } = useSelector((state: RootState) => state.user);
   const isAdmin = token !== '';
+
+  function onPressUpdate() {
+    dispatch(changeProduct(product));
+
+    navigate('/product/update');
+  }
 
   async function onPressDelete() {
     try {
@@ -27,7 +37,9 @@ const Product = ({ product, refreshProducts }: Props) => {
     <View style={[styles.container, isAdmin ? styles.admin : styles.visitor]}>
       {isAdmin && (
         <View style={styles.icons}>
-          <FontAwesome name="edit" size={24} color="#525659" />
+          <Pressable onPress={onPressUpdate}>
+            <FontAwesome name="edit" size={24} color="#525659" />
+          </Pressable>
           <Pressable onPress={onPressDelete}>
             <FontAwesome name="close" size={24} color="#525659" />
           </Pressable>

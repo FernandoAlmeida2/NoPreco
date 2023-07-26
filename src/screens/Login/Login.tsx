@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import AuthForm from "../../components/AuthForm";
+import AuthForm from "../../components/Forms/AuthForm";
 import Logo from "../../components/Logo";
 import { styles } from "./styles";
 

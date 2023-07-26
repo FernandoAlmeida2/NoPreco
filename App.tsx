@@ -11,6 +11,7 @@ import { NativeRouter, Route, Routes } from 'react-router-native';
 import { store } from './redux/store';
 import Home from './src/screens/Home/Home';
 import Login from './src/screens/Login/Login';
+import UpdateProduct from './src/screens/UpdateProduct/UpdateProduct';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -29,6 +30,7 @@ export default function App() {
           <Routes>
             <Route path="/" Component={Home} />
             <Route path="/login" Component={Login} />
+            <Route path="/product/update" Component={UpdateProduct} />
           </Routes>
           <StatusBar style="auto" />
         </View>
