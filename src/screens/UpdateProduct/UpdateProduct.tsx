@@ -5,7 +5,6 @@ import UpdateProductForm from "../../components/Forms/UpdateForm";
 import { styles } from "./styles";
 
 export default function UpdateProduct() {
-    const { token } = useSelector((state: RootState) => state.user);
     const { product } = useSelector((state: RootState) => state.product);
 
     return (

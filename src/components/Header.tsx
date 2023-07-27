@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     fontFamily: 'PaytoneOne_400Regular',
-    fontSize: 32,
+    fontSize: 28,
     color: '#fff'
   },
   mode: {

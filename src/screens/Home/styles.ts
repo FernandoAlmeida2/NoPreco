@@ -8,6 +8,24 @@ export const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20
     },
+    inputContainer: {
+        width: "100%",
+        height: 100,
+        backgroundColor: "#45c43e",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        paddingBottom: 20
+    },
+    input: {
+        textDecorationColor: "#000000",
+        width: 350,
+        height: 50,
+        borderRadius: 5,
+        backgroundColor: "#fff",
+        paddingLeft: 16,
+        fontSize: 16,
+        fontFamily: "NotoSansJP_400Regular",
+    },
     productRow: {
         height: 480,
         justifyContent: "center",
