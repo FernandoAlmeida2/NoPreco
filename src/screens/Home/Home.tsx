@@ -8,6 +8,7 @@ import Product from '../../components/Product';
 import { categoryList } from '../../constants/product';
 import { getProducts, ProductType } from '../../services/productApi';
 import { styles } from './styles';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function Home() {
   const [productSearched, setProductSearched] = useState('');
@@ -60,6 +61,12 @@ export default function Home() {
           autoCorrect={false}
         />
       </View>
+      {isAdmin && (
+        <View style={styles.addContainer}>
+          <AntDesign name="pluscircleo" size={24} color="#525659" />
+          <Text style={styles.addProduct}>Adicionar produto</Text>
+        </View>
+      )}
       <ScrollView contentContainerStyle={styles.contentArea}>
         {productSearched.length < 3
           ? categoryList.map((c) => (

@@ -20,12 +20,14 @@ const Header = ({ admin }: Props) => {
     return <AppLoading />;
   }
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>NoPreço</Text>
-      <Pressable onPress={() => navigate('/login')}>
-        <Text style={styles.mode}>{admin ? "Admin" : "Visitante"}</Text>
-      </Pressable>
-    </View>
+    <>
+      <View style={styles.container}>
+        <Text style={styles.logo}>NoPreço</Text>
+        <Pressable onPress={() => navigate('/login')}>
+          <Text style={styles.mode}>{admin ? 'Admin' : 'Visitante'}</Text>
+        </Pressable>
+      </View>
+    </>
   );
 };
 
