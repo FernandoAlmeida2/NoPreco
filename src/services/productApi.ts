@@ -16,11 +16,11 @@ export type ProductType = {
   description: string;
   imageUrl: string;
   price: number;
-  category: CategoryType;
+  category: string;
   updatedAt: string;
 };
 
-export type UpdateBody = Omit<ProductType, 'id' | 'updatedAt'>;
+export type ProductBody = Omit<ProductType, 'id' | 'updatedAt'>;
 
 export async function getProducts() {
   const response = await axios.get<ServiceResponse<ProductType[]>>(
@@ -30,8 +30,26 @@ export async function getProducts() {
   return response.data;
 }
 
+export async function saveProduct(
+  body: ProductBody,
+  token: string
+) {
+  const response = await axios.post<ServiceResponse<number>>(
+    `${BASE_URL}/product`,
+    body,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+
+  return response.data;
+}
+
+
 export async function updateProduct(
-  body: UpdateBody,
+  body: ProductBody,
   id: number,
   token: string
 ) {

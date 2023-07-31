@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Alert, Text, View, ScrollView, TextInput } from 'react-native';
+import {
+  Alert,
+  Text,
+  View,
+  ScrollView,
+  TextInput,
+  Pressable
+} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
@@ -9,6 +16,7 @@ import { categoryList } from '../../constants/product';
 import { getProducts, ProductType } from '../../services/productApi';
 import { styles } from './styles';
 import { AntDesign } from '@expo/vector-icons';
+import { useNavigate } from 'react-router-native';
 
 export default function Home() {
   const [productSearched, setProductSearched] = useState('');
@@ -16,6 +24,7 @@ export default function Home() {
   const [refreshSwitch, setRefreshSwitch] = useState(false);
   const initialProductList: ProductType[] = [];
   const [productList, setProductList] = useState(initialProductList);
+  const navigate = useNavigate();
   const { token } = useSelector((state: RootState) => state.user);
   const isAdmin = token !== '';
 
@@ -63,7 +72,9 @@ export default function Home() {
       </View>
       {isAdmin && (
         <View style={styles.addContainer}>
-          <AntDesign name="pluscircleo" size={24} color="#525659" />
+          <Pressable onPress={() => navigate('/product/new')}>
+            <AntDesign name="pluscircleo" size={24} color="#525659" />
+          </Pressable>
           <Text style={styles.addProduct}>Adicionar produto</Text>
         </View>
       )}

@@ -4,20 +4,20 @@ import Spinner from 'react-native-loading-spinner-overlay/lib';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-native';
 import { RootState } from '../../../redux/store';
-import { ProductType, updateProduct } from '../../services/productApi';
+import { ProductType, saveProduct } from '../../services/productApi';
 import { styles } from './styles';
 
 type Props = {
   product: ProductType;
 };
 
-export default function UpdateProductForm({ product }: Props) {
+export default function NewProductForm({ product }: Props) {
   const intialBodyState = {
-    name: product.name,
-    description: product.description,
-    imageUrl: product.imageUrl,
-    price: (product.price / 100).toFixed(2).replace('.', ','),
-    category: product.category
+    name: '',
+    description: '',
+    imageUrl: '',
+    price: '',
+    category: ''
   };
   const [bodyForm, setBodyForm] = useState(intialBodyState);
 
@@ -29,22 +29,20 @@ export default function UpdateProductForm({ product }: Props) {
     setLoading(true);
 
     try {
-      await updateProduct(
+      await saveProduct(
         {
           ...bodyForm,
           price: Math.round(Number(bodyForm.price.replace(',', '.')) * 100)
         },
-        product.id,
         token
       );
 
       navigate('/');
     } catch (error) {
-      Alert.alert(`Unable to update the product`);
+      Alert.alert(`Unable to save the product`);
       console.log(error);
     } finally {
       setLoading(false);
-      setBodyForm(intialBodyState);
     }
   }
 
@@ -98,7 +96,7 @@ export default function UpdateProductForm({ product }: Props) {
         disabled={isLoading}
         onPress={submitForm}
       >
-        <Text style={styles(isLoading).text}>Atualizar produto</Text>
+        <Text style={styles(isLoading).text}>Registrar produto</Text>
       </Pressable>
 
       <Spinner
